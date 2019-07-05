@@ -1,3 +1,5 @@
+from converters import COMPUTATIONAL_KEYS
+
 class Gate:
     """An arbitrary Logic Gate. This parent class is never used directly, but instead is used by all the other gates
     here. This is a strictly internal class.
@@ -15,6 +17,12 @@ class Gate:
 
     def add_output(self, new_output):
         self.outputs.append(new_output)
+
+    def compute(self):
+        return COMPUTATIONAL_KEYS[self.kind](self)
+
+    def __getitem__(self, index):
+        return self.inputs[index]
 
 class AND(Gate):
     def __init__(self, *inputs):
