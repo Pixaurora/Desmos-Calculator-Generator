@@ -1,17 +1,19 @@
 class Input:
-    """An arbitrary Logic Gate. This parent class is never used directly, but instead is used by all the other gates
-    here. This is a strictly internal class.
+    """An arbitrary Input to a Logic Gate. This is useful for making it so the value can be changed when computed.
     """
 
     __slots__ = ('max_inputs', 'inputs', 'outputs', 'kind')
 
-    def __init__(self, kind: str, max_inputs: int, *inputs):
-        self.kind = kind
-        self.inputs = []
+    def __init__(self, name: str):
+        self.name = name
+        self.value = None # Can be either True or False by default.
         self.outputs = []
 
-        for i in inputs:
-            i.add_output(self)
+    def change_value(self, new_value: bool):
+        self.value = new_value
+
+    def get_value(self) -> bool:
+        return self.value
 
     def add_output(self, new_output):
         self.outputs.append(new_output)
