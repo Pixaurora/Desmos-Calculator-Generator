@@ -24,4 +24,7 @@ def add_generator(bits):
 
         return sum([output.compute()*2**i for i, output in enumerate(o+[c[-1]])])
 
+    add.outputs = o
+    add.overflow = c[-1]
+
     return add
