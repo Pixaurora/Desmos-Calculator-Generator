@@ -10,7 +10,7 @@ class Gate:
 
     def __init__(self, kind: str, max_inputs: int, *inputs):
         self.kind = kind
-        self.inputs = []
+        self.inputs = inputs
         self.outputs = []
 
         for i in inputs:

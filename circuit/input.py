@@ -24,6 +24,9 @@ class Bit:
     def add_output(self, new_output):
         self.outputs.append(new_output)
 
+    def compute(self):
+        return self.value
+
 class Input:
     """An input to a function. Is made up of bits.
     """
@@ -33,10 +36,10 @@ class Input:
         self.bit_list = [Bit() for i in range(bits)]
 
     def __getitem__(self, index:int) -> Bit:
-        return self.bits[index]
+        return self.bit_list[index]
 
     def set_number(self, new_number:int):
-        if floor(log(new_number, 2)) > self.bits:
+        if floor(log(new_number, 2)) >= self.bits:
             raise ValueError("This number has too many bits!")
 
         for i, bit in enumerate(self.bit_list):
@@ -44,3 +47,5 @@ class Input:
 
     def get_number(self) -> int:
         return sum([bit*2**i for i, bit in enumerate(self.bit_list)])
+
+    number = property(get_number, set_number)
