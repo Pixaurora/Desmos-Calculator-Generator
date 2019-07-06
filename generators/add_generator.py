@@ -4,8 +4,8 @@ from circuit import OR
 from circuit import XOR
 
 def add_generator(bits):
-    a = Input(bits)
-    b = Input(bits)
+    a = Input(bits, "a")
+    b = Input(bits, "b")
 
     c = []
     o = []
@@ -24,7 +24,6 @@ def add_generator(bits):
 
         return sum([output.compute()*2**i for i, output in enumerate(o+[c[-1]])])
 
-    add.outputs = o
-    add.overflow = c[-1]
+    add.outputs = o + [c[-1]]
 
     return add
