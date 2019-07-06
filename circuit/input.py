@@ -7,14 +7,13 @@ class Bit:
     computed.
     """
 
-    __slots__ = ('value', 'name', 'position', 'outputs', 'kind')
+    __slots__ = ('value', 'name', 'position', 'kind')
 
     def __init__(self, name:str, position:int):
         self.value = None  # Can be either True or False by default.
         self.kind = "bit"
         self.name = name
         self.position = position # Used to check the index of the bit. Mostly used when transforming it.
-        self.outputs = []
 
     def change_value(self, new_value: bool):
         self.value = new_value
@@ -24,9 +23,6 @@ class Bit:
 
     def __mul__(self, other: int):
         return self.value * other
-
-    def add_output(self, new_output):
-        self.outputs.append(new_output)
 
     def compute(self):
         return self.value

@@ -6,18 +6,11 @@ class Gate:
     here. This is a strictly internal class.
     """
 
-    __slots__ = ('max_inputs', 'inputs', 'outputs', 'kind')
+    __slots__ = ('max_inputs', 'inputs', 'kind')
 
     def __init__(self, kind: str, max_inputs: int, *inputs):
         self.kind = kind
         self.inputs = inputs
-        self.outputs = []
-
-        for i in inputs:
-            i.add_output(self)
-
-    def add_output(self, new_output):
-        self.outputs.append(new_output)
 
     def compute(self):
         return COMPUTATIONAL_KEYS[self.kind](self)
