@@ -1,6 +1,7 @@
 from math import floor
 from math import log
 
+
 class Bit:
     """An arbitrary Bit to input to a Logic Gate. This is useful for making it so the value can be changed when
     computed.
