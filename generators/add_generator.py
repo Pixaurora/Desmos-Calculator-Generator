@@ -22,6 +22,6 @@ def add_generator(bits):
         a.number = x
         b.number = y
 
-        return [output.compute()*2**i for i, output in enumerate(o+[c[-1]])]
+        return sum([output.compute()*2**i for i, output in enumerate(o+[c[-1]])])
 
     return add
