@@ -1,5 +1,4 @@
-from converters import COMPUTATIONAL_KEYS
-
+from .computational_keys import COMPUTATIONAL_KEYS
 
 class Gate:
     """An arbitrary Logic Gate. This parent class is never used directly, but instead is used by all the other gates
