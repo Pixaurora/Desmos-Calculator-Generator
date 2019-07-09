@@ -3,7 +3,7 @@ class Gate:
     here. This is a strictly internal class.
     """
 
-    __slots__ = ('max_inputs', 'inputs', 'kind')
+    __slots__ = ('required_inputs', 'inputs', 'kind')
 
     def __init__(self, kind: str, required_inputs: int, *inputs):
         self.kind = kind
@@ -14,9 +14,6 @@ class Gate:
 
     def __getitem__(self, index):
         return self.inputs[index]
-
-    def convert_python(self, as_list=False):
-        [self[0].convert_python(), self[1].convert_python()]
 
 
 class AND(Gate):
@@ -38,6 +35,18 @@ class AND(Gate):
 
         return return_list if as_list else '+'.join(return_list)
 
+    def convert_latex(self, as_list=False):
+        I = self[0].convert_latex(as_list=True)
+        J = self[1].convert_latex(as_list=True)
+
+        return_list = []
+
+        for i in I:
+            for j in J:
+                return_list.append(f'{i}{j}')
+
+        return return_list if as_list else '+'.join(return_list)
+
 
 
 class XOR(Gate):
@@ -52,6 +61,10 @@ class XOR(Gate):
 
         return [return_statement] if as_list else return_statement
 
+    def convert_latex(self, as_list=False):
+        return_statement = f'\\left|{self[0].convert_latex()}-{"-".join(self[1].convert_latex(as_list=True))}\\right|'
+
+        return [return_statement] if as_list else return_statement
 
 class OR(Gate):
     def __init__(self, *inputs):
@@ -65,6 +78,11 @@ class OR(Gate):
 
         return return_list if as_list else '+'.join(return_list)
 
+    def convert_latex(self, as_list=False):
+        return_list = [self[0].convert_latex(), self[1].convert_latex()]
+
+        return return_list if as_list else '+'.join(return_list)
+
 
 class NOT(Gate):
     def __init__(self, input):
@@ -75,5 +93,10 @@ class NOT(Gate):
 
     def convert_python(self, as_list=False):
         return_statement = f'1-{self[0].convert_python()}'
+
+        return [return_statement] if as_list else return_statement
+
+    def convert_latex(self, as_list=False):
+        return_statement = f'1-{self[0].convert_latex()}'
 
         return [return_statement] if as_list else return_statement

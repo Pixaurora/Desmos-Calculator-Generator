@@ -32,6 +32,12 @@ class Bit:
 
         return [return_statement] if as_list else return_statement
 
+    def convert_latex(self, as_list=False):
+        left = "{"
+        right = "}"
+        return_statement = f'\\operatorname{left}mod{right}\\left(\\operatorname{left}floor{right}\\left(\\frac{left}{self.name}{right}{left}{2**self.position}{right}\\right),2\\right)'
+
+        return [return_statement] if as_list else return_statement
 
 class Input:
     """An input to a function. Is made up of bits.
