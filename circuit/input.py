@@ -27,6 +27,11 @@ class Bit:
     def compute(self):
         return self.value
 
+    def convert_python(self, as_list=False):
+        return_statement = f'{self.name}//{2**self.position}%2'
+
+        return [return_statement] if as_list else return_statement
+
 
 class Input:
     """An input to a function. Is made up of bits.

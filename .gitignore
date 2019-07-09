@@ -1,4 +1,5 @@
 .idea/
+.theia/
 venv/
 __pycache__/
 vcs.xml
