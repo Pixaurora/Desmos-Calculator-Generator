@@ -79,7 +79,7 @@ class OR(Gate):
         return return_list if as_list else '+'.join(return_list)
 
     def convert_latex(self, as_list=False):
-        return_list = [self[0].convert_latex(), self[1].convert_latex()]
+        return_list = AND(*self.inputs).convert_latex(as_list=True) + XOR(*self.inputs).convert_latex(as_list=True)
 
         return return_list if as_list else '+'.join(return_list)
 

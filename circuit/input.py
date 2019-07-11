@@ -37,6 +37,9 @@ class Bit:
         right = "}"
         return_statement = f'\\operatorname{left}mod{right}\\left(\\operatorname{left}floor{right}\\left(\\frac{left}{self.name}{right}{left}{2**self.position}{right}\\right),2\\right)'
 
+        if self.position == 0:
+            return_statement = f'\\operatorname{left}mod{right}\\left({self.name},2\\right)'
+
         return [return_statement] if as_list else return_statement
 
 class Input:

@@ -3,9 +3,9 @@ from circuit import Input
 from circuit import OR
 from circuit import XOR
 
-def add_generator(bits):
-    a = Input(bits, "a")
-    b = Input(bits, "b")
+def add_generator(bits, name1='a', name2='b'):
+    a = Input(bits, name1)
+    b = Input(bits, name2)
 
     c = []
     o = []
