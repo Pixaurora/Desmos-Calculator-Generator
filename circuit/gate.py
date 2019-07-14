@@ -79,9 +79,11 @@ class OR(Gate):
         return return_list if as_list else '+'.join(return_list)
 
     def convert_latex(self, as_list=False):
-        return_list = AND(*self.inputs).convert_latex(as_list=True) + XOR(*self.inputs).convert_latex(as_list=True)
+        left = '{'
+        right = '}'
+        return_statement = f'\\operatorname{left}sign{right}\\left({self[0].convert_latex()}+{self[1].convert_latex()}\\right)'
 
-        return return_list if as_list else '+'.join(return_list)
+        return [return_statement] if as_list else return_statement
 
 
 class NOT(Gate):
