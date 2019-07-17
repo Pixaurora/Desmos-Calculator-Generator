@@ -1,14 +1,11 @@
-from generators import add_generator
-from converters import convert_latex
+from components import Adder
 
-bits = int(input("Input an integer: "))
+bits = int(input("Input an integer to represent how many bits : "))
 
-add = add_generator(bits, name1='x', name2='y')
-
-important = convert_latex(add)
+adder = Adder(bits)
 
 file = open("output.txt", "w")
 
-file.writelines([f'Bits: {bits}\n', important])
-
+file.writelines([f'Bits: {bits}\n', adder.convert_latex()])
 file.close()
+print("Successfully written.")

@@ -1,8 +1,10 @@
 from math import floor
 from math import log
 
+from .component import Component
 
-class Bit:
+
+class Bit(Component):
     """An arbitrary Bit to input to a Logic Gate. This is useful for making it so the value can be changed when
     computed.
     """
@@ -14,6 +16,9 @@ class Bit:
         self.kind = "bit"
         self.name = name
         self.position = position # Used to check the index of the bit. Mostly used when transforming it.
+
+    def __str__(self):
+        return f'{self.name}[{self.position}]'
 
     def change_value(self, new_value: bool):
         self.value = new_value
@@ -42,11 +47,20 @@ class Bit:
 
         return [return_statement] if as_list else return_statement
 
+
 class Input:
-    """An input to a function. Is made up of bits.
+    """An input to a circuit. Is made up of bits.
+
+    Attributes
+    ----------
+    bits: int
+
+    name: str
     """
 
-    def __init__(self, bits: int, name:str):
+    __slots__ = ('bit_list', 'name', 'bits')
+
+    def __init__(self, bits: int, name: str):
         self.bits = bits
         self.name = name
         self.bit_list = [Bit(name, i) for i in range(bits)]
@@ -55,8 +69,9 @@ class Input:
         return self.bit_list[index]
 
     def set_number(self, new_number: int):
-        if floor(log(new_number, 2)) >= self.bits:
-            raise ValueError("This number has too many bits!")
+        if new_number != 0:
+            if floor(log(new_number, 2)) >= self.bits:
+                raise ValueError("This number has too many bits!")
 
         for i, bit in enumerate(self.bit_list):
             bit.change_value(floor(new_number / 2 ** i) % 2)

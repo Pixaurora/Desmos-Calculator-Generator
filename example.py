@@ -1,5 +1,5 @@
-from generators import add_generator
+from components import Adder
 
-add = add_generator(8)
+adder = Adder(4)
 
-print(add(255, 255))
+print(adder(15, 15))
