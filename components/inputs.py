@@ -11,11 +11,13 @@ class Bit(Component):
 
     __slots__ = ('value', 'name', 'position', 'kind')
 
-    def __init__(self, name:str, position:int):
+    def __init__(self, name: str, position: int):
         self.value = None  # Can be either True or False by default.
         self.kind = "bit"
         self.name = name
-        self.position = position # Used to check the index of the bit. Mostly used when transforming it.
+        self.position = (
+            position
+        )  # Used to check the index of the bit. Mostly used when transforming it.
 
     def __str__(self):
         return f'{self.name}[{self.position}]'
@@ -43,7 +45,9 @@ class Bit(Component):
         return_statement = f'\\operatorname{left}mod{right}\\left(\\operatorname{left}floor{right}\\left(\\frac{left}{self.name}{right}{left}{2**self.position}{right}\\right),2\\right)'
 
         if self.position == 0:
-            return_statement = f'\\operatorname{left}mod{right}\\left({self.name},2\\right)'
+            return_statement = (
+                f'\\operatorname{left}mod{right}\\left({self.name},2\\right)'
+            )
 
         return [return_statement] if as_list else return_statement
 

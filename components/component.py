@@ -6,4 +6,5 @@ class Component(ABC):
 
     Mostly used to make type hints and whatnot easier.
     """
+
     pass
